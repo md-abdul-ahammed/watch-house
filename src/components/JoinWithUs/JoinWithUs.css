@@ -1,0 +1,6 @@
+.social-btn-icon:hover{
+    background-color: black;
+    color: #fff;
+    cursor: pointer;
+    transition: ease-in-out .5s;
+}

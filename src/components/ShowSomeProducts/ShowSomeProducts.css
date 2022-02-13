@@ -1,0 +1,14 @@
+.show-s-p-image{
+    width: 200px;
+    height: 200px;
+}
+
+@media only screen and (max-width: 576px) {
+    .show-s-p-image{
+        width: 80px;
+        height: 80px;
+    }
+    .r-show-content{
+        font-size: 12px;
+    }
+  }

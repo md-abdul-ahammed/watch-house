@@ -1,0 +1,32 @@
+.discover-container{
+    background-image: url("../../images/bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.dis-img-area{
+    position: relative;
+}
+.dis-desc-area{
+    position: absolute;
+    left: 12%;
+    bottom: -12%;
+    width: 75%;
+}
+
+
+@media only screen and (max-width: 576px) {
+    .dis-desc-area{
+        left: 8%;
+        bottom: -45%;
+        width: 85%;
+    }
+    .discover-description-area .py-5{
+        padding-bottom: 5rem !important;
+    }
+    .dis-desc-area > h5{
+        font-size: 1rem;
+    }
+    .dis-desc-area > .nav-link{
+        padding:0;
+    }
+  }
