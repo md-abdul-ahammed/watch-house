@@ -38,7 +38,7 @@ const MyOrders = () => {
     // https://sheltered-brushlands-89706.herokuapp.com/
 
     useEffect(() => {
-        fetch(`http://localhost:5000/orders/${user.email}`)
+        fetch(`https://secret-dawn-73150.herokuapp.com/orders/${user.email}`)
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [user.email, isDeleted]);
@@ -47,7 +47,7 @@ const MyOrders = () => {
         console.log(id);
         const confirm = window.confirm("Are you Sure For Delete?")
         if (confirm) {
-            fetch(`http://localhost:5000/deleteOrder?email=${user.email}&id=${id}`, {
+            fetch(`https://secret-dawn-73150.herokuapp.com/deleteOrder?email=${user.email}&id=${id}`, {
                 method: "DELETE",
                 headers: {
                     "content-type": "application/json"

@@ -18,7 +18,7 @@ const Review = () => {
         data.name = user.displayName;
         data.img = user.photoURL;
 
-        fetch('http://localhost:5000/reviews', {
+        fetch('https://secret-dawn-73150.herokuapp.com/reviews', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

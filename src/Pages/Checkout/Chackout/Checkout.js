@@ -15,10 +15,10 @@ const Checkout = () => {
     const handleCheckoutOpen = () => setOpenCheckout(true);
     const handleCheckoutClose = () => setOpenCheckout(false);
 
-    // http://localhost:5000/
+    // https://secret-dawn-73150.herokuapp.com/
 
     useEffect(() => {
-        fetch(`http://localhost:5000/checkout/${id}`)
+        fetch(`https://secret-dawn-73150.herokuapp.com/checkout/${id}`)
             .then(res => res.json())
             .then(data => setProduct(data))
     }, []);

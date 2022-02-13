@@ -42,7 +42,7 @@ const CheckoutModal = ({ openCheckout, handleCheckoutClose, cart }) => {
         data.status = "pending";
         data.cart = cart;
 
-        fetch('http://localhost:5000/order', {
+        fetch('https://secret-dawn-73150.herokuapp.com/order', {
             method: "POST",
             headers: {
                 "content-type": "application/json"

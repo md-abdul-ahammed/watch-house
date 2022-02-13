@@ -4,7 +4,7 @@ import ReactStars from "react-rating-stars-component";
 const Feedback = () => {
     const [feedbacks, setFeedbacks] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/reviews')
+        fetch('https://secret-dawn-73150.herokuapp.com/reviews')
             .then(res => res.json())
             .then(data => setFeedbacks(data))
     }, [])
