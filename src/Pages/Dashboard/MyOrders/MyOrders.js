@@ -34,6 +34,7 @@ const MyOrders = () => {
     const [products, setProducts] = useState([]);
     const { user } = useAuth();
     const [isDeleted, setIsDeleted] = useState(null);
+    const [todayProducts, setTodayProducts] = useState({});
 
     // https://sheltered-brushlands-89706.herokuapp.com/
 
@@ -43,19 +44,27 @@ const MyOrders = () => {
             .then(data => setProducts(data))
     }, [user.email, isDeleted]);
 
-    const handleDelete = (id) => {
-        console.log(id);
+
+
+
+
+    console.log(todayProducts);
+
+    const handleDelete = (id, productId) => {
+        console.log(id, productId);
         const confirm = window.confirm("Are you Sure For Delete?")
         if (confirm) {
-            fetch(`https://secret-dawn-73150.herokuapp.com/deleteOrder?email=${user.email}&id=${id}`, {
-                method: "DELETE",
+            // fetch(`http://localhost:5000/deleteOrder?email=${user.email}&id=${id}`, {
+            fetch(`https://secret-dawn-73150.herokuapp.com/deleteOrder`, {
+                method: "PUT",
                 headers: {
                     "content-type": "application/json"
-                }
+                },
+                body: JSON.stringify({ id: id, email: user.email, productId: productId })
             })
                 .then(res => res.json())
                 .then(result => {
-                    if (result.deletedCount) {
+                    if (result.modifiedCount) {
                         setIsDeleted(true)
                     } else {
                         setIsDeleted(false)
@@ -65,7 +74,6 @@ const MyOrders = () => {
 
     }
 
-    console.log(products);
 
     return (
         <div>
@@ -84,7 +92,7 @@ const MyOrders = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {products?.cart?.cartItems.map((data) => (
+                            {/* {products?.cart?.cartItems.map((data) => (
                                 <StyledTableRow key={data._id}>
                                     <StyledTableCell component="th" scope="row" >
                                         <img style={{ height: '80px' }} src={data.img} alt="" />
@@ -97,7 +105,21 @@ const MyOrders = () => {
                                     <StyledTableCell className='text-danger fw-bold' align="right">{products?.status}</StyledTableCell>
                                     <StyledTableCell align="right"><button onClick={() => handleDelete(data._id)} className='button-design'>Cancel</button></StyledTableCell>
                                 </StyledTableRow>
-                            ))}
+                            ))} */}
+                            {products.map((product) => product.cart.cartItems.map(data => (
+                                <StyledTableRow key={data._id}>
+                                    <StyledTableCell component="th" scope="row" >
+                                        <img style={{ height: '80px' }} src={data.img} alt="" />
+                                    </StyledTableCell>
+                                    <StyledTableCell align="right">
+                                        {data?.product_name}
+                                    </StyledTableCell>
+                                    <StyledTableCell align="right">${data?.sell_price}</StyledTableCell>
+                                    <StyledTableCell align="right">{data?.cartQuantity}</StyledTableCell>
+                                    <StyledTableCell className='text-danger fw-bold' align="right">{product?.status}</StyledTableCell>
+                                    <StyledTableCell align="right"><button onClick={() => handleDelete(data._id, product._id)} className='button-design'>Cancel</button></StyledTableCell>
+                                </StyledTableRow>
+                            )))}
                         </TableBody>
                     </Table>
                 </TableContainer>
