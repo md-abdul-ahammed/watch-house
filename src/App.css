@@ -3,3 +3,8 @@
 body{
   font-family: 'Jost', sans-serif;
 }
+
+.slick-next{
+  color: black !important;
+  background: black !important;
+}
