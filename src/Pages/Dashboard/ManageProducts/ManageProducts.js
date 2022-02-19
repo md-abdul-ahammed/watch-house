@@ -65,7 +65,7 @@ const ManageProducts = () => {
 
     return (
         <div>
-            <h1 className='text-center'>My Orders</h1>
+            <h1 className='text-center'>Manage All Product</h1>
             <Box>
                 <TableContainer component={Paper}>
                     <Table aria-label="customized table">

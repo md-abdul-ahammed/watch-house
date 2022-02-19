@@ -1,3 +1,4 @@
+import { Button } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import ReactStars from "react-rating-stars-component";
 import { useParams } from 'react-router';
@@ -5,15 +6,20 @@ import useAuth from '../../../hooks/useAuth';
 import Footer from '../../Shared/Footer/Footer';
 import Navigation from '../../Shared/Navigation/Navigation';
 import CheckoutModal from '../CheckoutModal/CheckoutModal';
+import { useDispatch } from "react-redux"
+import { addToCart } from '../../../features/cartSlice';
+
 
 const Checkout = () => {
     const [product, setProduct] = useState({});
     const { id } = useParams();
+    const dispatch = useDispatch();
 
+    const handleAddToCart = (product) => {
+        dispatch(addToCart(product));
 
-    const [openCheckout, setOpenCheckout] = React.useState(false);
-    const handleCheckoutOpen = () => setOpenCheckout(true);
-    const handleCheckoutClose = () => setOpenCheckout(false);
+    }
+
 
     // https://secret-dawn-73150.herokuapp.com/
 
@@ -45,8 +51,9 @@ const Checkout = () => {
                             <small className="text-muted">{product.description}</small>
                             <small className="text-muted d-block mt-3 fw-bold">{product.stock} in stock</small>
                             <div className='my-3'>
-                                <button onClick={handleCheckoutOpen} className='button-design'>Buy Now</button>
-                                {/* <button className='button-design' onClick={handleBuyNow}>Buy Now</button> */}
+                                <div className='nav-link p-0'>
+                                    <Button style={{ fontSize: "12px" }} onClick={() => handleAddToCart(product)} className='button-design fw-bold' variant='contained'>Add To Cart</Button>
+                                </div>
                             </div>
                             <hr className='my-4' />
                             <small className='d-block my-2'><span className='text-muted'>SKU:</span> {product.sku}</small>
@@ -54,12 +61,6 @@ const Checkout = () => {
                         </div>
                     </div>
                 </div>
-                <CheckoutModal
-                    product={product}
-                    handleCheckoutClose={handleCheckoutClose}
-                    openCheckout={openCheckout}
-                >
-                </CheckoutModal>
             </div>
             <hr />
             <Footer></Footer>

@@ -40,13 +40,20 @@ const ManageAllOrders = () => {
     const { register, handleSubmit } = useForm();
     const [open, setOpen] = React.useState(false);
 
+    console.log(products);
+    useEffect(() => {
+        fetch('https://secret-dawn-73150.herokuapp.com/order')
+            .then(res => res.json())
+            .then(data => setProducts(data))
+    }, []);
+
+
     const handleUpdate = (id) => {
         setId(id)
     }
 
     // update status
     const onSubmit = (data) => {
-        console.log(data)
         fetch(`https://secret-dawn-73150.herokuapp.com/updateStatus/${id}`, {
             method: 'PUT',
             headers: {
@@ -56,7 +63,6 @@ const ManageAllOrders = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 if (data.modifiedCount) {
                     setOpen(true);
                 }
@@ -73,13 +79,10 @@ const ManageAllOrders = () => {
         setOpen(false);
     };
 
-    useEffect(() => {
-        fetch('https://secret-dawn-73150.herokuapp.com/order')
-            .then(res => res.json())
-            .then(data => setProducts(data))
-    }, [products, isDeleted, user.email]);
+
+
+    // delete customer order
     const handleDelete = (id) => {
-        console.log(id)
         const confirm = window.confirm("Are you Sure For Delete?")
         if (confirm) {
             fetch(`https://secret-dawn-73150.herokuapp.com/deleteOrder/${id}`, {
@@ -111,38 +114,32 @@ const ManageAllOrders = () => {
                                 <StyledTableCell >Product Images</StyledTableCell>
                                 <StyledTableCell align="right">Product Name</StyledTableCell>
                                 <StyledTableCell align="right">Product Price</StyledTableCell>
+                                <StyledTableCell align="right">Product Quantity</StyledTableCell>
                                 <StyledTableCell align="right">Product Statues</StyledTableCell>
                                 <StyledTableCell align="right">Order</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {products.map((data) => (
-                                <StyledTableRow key={data.name}>
+                            {products.map((product) => product.cart.cartItems.map(data => (
+                                <StyledTableRow key={data.brand_name}>
                                     <StyledTableCell component="th" scope="row" >
-                                        <img style={{ height: '80px' }} src={data.product?.img} alt="" />
+                                        <img style={{ height: '80px' }} src={data?.img} alt="" />
                                     </StyledTableCell>
                                     <StyledTableCell align="right">
-                                        {data.product?.product_name}
+                                        {data?.product_name}
                                     </StyledTableCell>
-                                    <StyledTableCell align="right">${data.product?.sell_price}</StyledTableCell>
+                                    <StyledTableCell align="right">${data?.sell_price}</StyledTableCell>
                                     <StyledTableCell align="right">
-                                        <form onSubmit={handleSubmit(onSubmit)}>
-                                            {
-                                                data.status === 'approved' ? <select {...register("status")}>
-                                                    <option value='pending'>{data.status}</option>
-                                                    <option value="approved">approved</option>
-                                                </select> : <select {...register("status")}>
-                                                    <option value='pending'>{data.status}</option>
-                                                    <option value="approved">approved</option>
-                                                </select>
-                                            }
-                                            <button className='ms-2 simple-border px-2 py-1' onClick={() => handleUpdate(data._id)} type="submit" >Update</button>
-                                        </form>
+                                        {data?.cartQuantity}
+                                    </StyledTableCell>
+                                    <StyledTableCell align="right">
+                                        {product?.status}
                                     </StyledTableCell>
                                     {/* <StyledTableCell className='text-danger fw-bold' align="right">{data.product?.status}</StyledTableCell> */}
                                     <StyledTableCell align="right"><button onClick={() => handleDelete(data._id)} className='button-design'>Cancel</button></StyledTableCell>
                                 </StyledTableRow>
-                            ))}
+                            )))
+                            }
                         </TableBody>
                     </Table>
                 </TableContainer>

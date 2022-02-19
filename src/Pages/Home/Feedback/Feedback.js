@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactStars from "react-rating-stars-component";
+import Slider from "react-slick";
+import "./Feedback.css"
 
 const Feedback = () => {
     const [feedbacks, setFeedbacks] = useState([]);
@@ -9,32 +11,58 @@ const Feedback = () => {
             .then(data => setFeedbacks(data))
     }, [])
 
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 1000,
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        responsive: [
+            {
+                breakpoint: 767,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 1279,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                }
+            }
+        ]
+    };
+
     return (
         <div className="my-5">
-            <div className='mb-5'>
+            <div>
                 <h5 className='d-flex justify-content-center c-primary-color fw-bold'>Our Customer Say</h5>
                 <h1 className='d-flex justify-content-center'>What Our Customer Say</h1>
                 <h1 className='d-flex justify-content-center'>About Us</h1>
             </div>
-            <div className={feedbacks.length > 2 ? "row row-cols-1 row-cols-md-3 container-md container-lg mx-auto g-4 px-2" : "row row-cols-1 row-cols-md-2 container-md container-lg mx-auto g-4 px-2"}>
-                {
-                    feedbacks.map(feedback =>
-                        <div key={feedback._id} className="col ">
-                            <div className='text-center hv-shadow py-5 card custom-rounded h-100'>
-                                <div className='d-flex justify-content-center '>
-                                    <img src={feedback.img} className='img-rounded card-img-top' alt="..." />
-                                </div>
-                                <div className="card-body text-center">
-                                    <h3 className='fw-bold'>{feedback.name}</h3>
-                                    <div className='d-flex justify-content-center'>
-                                        <ReactStars activeColor="red" size={16} value={feedback.review} edit={false} />
+            <div className='mx-5'>
+                <Slider {...settings}>
+                    {
+                        feedbacks.map(feedback =>
+                            <div className='feedback-container' key={feedback._id}>
+                                <div style={{ height: "25rem", border: "10px solid #fff", backgroundColor: "#f4f4f4" }} className='text-center shadow py-5 mx-3 my-5 card custom-rounded'>
+                                    <div className='d-flex justify-content-center '>
+                                        <img src={feedback.img} className='img-rounded card-img-top' alt="..." />
                                     </div>
-                                    <p>"{feedback.feedback}"</p>
+                                    <div className="card-body text-center">
+                                        <h3 className='fw-bold'>{feedback.name}</h3>
+                                        <div className='d-flex justify-content-center'>
+                                            <ReactStars activeColor="red" size={16} value={feedback.review} edit={false} />
+                                        </div>
+                                        <p>"{feedback.feedback}"</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    )
-                }
+                        )
+                    }
+                </Slider>
             </div>
         </div>
     );

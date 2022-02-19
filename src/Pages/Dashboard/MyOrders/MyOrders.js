@@ -46,10 +46,6 @@ const MyOrders = () => {
 
 
 
-
-
-    console.log(todayProducts);
-
     const handleDelete = (id, productId) => {
         console.log(id, productId);
         const confirm = window.confirm("Are you Sure For Delete?")

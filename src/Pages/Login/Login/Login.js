@@ -6,6 +6,7 @@ import { NavLink } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 import { useHistory, useLocation } from "react-router";
 import './login.css';
+import GoogleIcon from '@mui/icons-material/Google';
 
 const Login = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -71,20 +72,26 @@ const Login = () => {
                                 {errors.password && <span style={{ width: '80%' }} className='text-danger d-flex mx-auto'>This password field is required</span>}
 
                                 <Button style={{ width: '80%' }}
-                                    className='mt-4 mb-2 d-flex mx-auto'
+                                    className='mt-4 button-design fw-bold mb-2 d-flex mx-auto'
                                     variant='contained'
                                     type="submit"
                                 >Login</Button>
-                                <small style={{ width: '80%' }} className='d-flex mx-auto'>Are you new member? Please,  <NavLink className='ms-2 fw-bold' to='/register'> Register</NavLink></small>
+                                <small style={{ width: '80%' }} className='d-flex mx-auto'> Are you new member? Please,  <NavLink className='ms-2 fw-bold' to='/register'> Register</NavLink></small>
+                                <div className='mt-3 d-flex flex-column align-items-center justify-content-center'>
+                                    <small className='fw-bold'><span className='primary-c-color fw-bold me-1'>NOTE:</span>Are you want to login as a admin ?</small>
+                                    <small className='fw-bold '>Username: <span className='text-primary'>admin@admin.com</span></small>
+                                    <small className='fw-bold '>Password: <span className='text-primary'>123456</span></small>
+                                </div>
                             </form>}
                             {/* spinner loading add here */}
                             {loading && <div style={{ width: "70px", height: '70px' }} className="spinner-border d-flex mx-auto text-secondary" role="status">
                                 <span className="visually-hidden">Loading...</span>
                             </div>}
-                            <div className='d-flex justify-content-center fw-bold my-2'>------------------------Or------------------------</div>
+                            <div className='d-flex justify-content-center fw-bold my-2'>------------------------------------------  Or  ------------------------------------------</div>
                             <div className='d-flex justify-content-around py-2'>
-                                <Button onClick={handleGoogleSignIn} variant='contained'>Google Sing In</Button>
-                                <Button variant='contained'>Github Sing IN</Button>
+                                <Button className='button-design fw-bold' onClick={handleGoogleSignIn} variant='contained'><GoogleIcon sx={{ mr: 2 }} />Google Sing In</Button>
+
+                                {/* <Button variant='contained'>Github Sing IN</Button> */}
                             </div>
                             {/* confirm user login notification add here */}
                             {user?.email &&

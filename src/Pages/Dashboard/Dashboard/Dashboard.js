@@ -97,7 +97,7 @@ function Dashboard(props) {
                         ml: { sm: `${drawerWidth}px` },
                     }}
                 >
-                    <Toolbar>
+                    <Toolbar className='bg-dark'>
                         <IconButton
                             color="inherit"
                             aria-label="open drawer"
@@ -108,7 +108,7 @@ function Dashboard(props) {
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="h6" noWrap component="div">
-                            Responsive drawer
+                            Dashboard
                         </Typography>
                     </Toolbar>
                 </AppBar>

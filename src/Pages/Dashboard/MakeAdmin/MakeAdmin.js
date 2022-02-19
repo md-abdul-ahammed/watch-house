@@ -41,22 +41,29 @@ const MakeAdmin = () => {
 
     return (
         <div>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <TextField
-                    style={{ width: '80%' }}
-                    className='mt-4 d-flex mx-auto'
-                    {...register("email", { required: true })}
-                    variant="outlined"
-                    label="Email"
-                    type="email"
-                />
-                {errors.email && <span style={{ width: '80%' }} className='text-danger d-flex mx-auto'>This email field is required</span>}
 
-                <Button
-                    className='mt-4 mb-2 px-5 fw-bold d-flex mx-auto button-design'
-                    variant='contained'
-                    type="submit"
-                >Make Admin</Button>
+            <div>
+                <div className="fs-2 text-center">Make Admin With Email Address</div>
+            </div>
+
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <div className='mx-auto d-flex flex-column' style={{ width: '80%' }}>
+                    <TextField
+                        {...register("email", { required: true })}
+                        variant="outlined"
+                        label="Email"
+                        type="email"
+                    />
+                    {errors.email && <span style={{ width: '80%' }} className='text-danger d-flex mx-auto'>This email field is required</span>}
+
+                    <div className='d-flex justify-content-end'>
+                        <Button
+                            className='mt-4 w-25 fw-bold button-design'
+                            variant='contained'
+                            type="submit"
+                        >Make Admin</Button>
+                    </div>
+                </div>
             </form>
             {notification &&
                 <Snackbar style={{ color: 'white' }} open={open} autoHideDuration={6000} onClose={handleClose}>

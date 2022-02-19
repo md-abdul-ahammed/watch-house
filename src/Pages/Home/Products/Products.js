@@ -49,8 +49,14 @@ const Products = () => {
                                         <ReactStars activeColor="red" size={16} value={5} edit={false} />
                                         <small className='ms-2'><small>({product.rating} review)</small></small>
                                     </div>
-                                    {/* <Link className="nav-link" to={`/checkout/${product._id}`}><Button className='button-design fw-bold' variant='contained'>Buy Now</Button></Link> */}
-                                    <Button onClick={() => handleAddToCart(product)} className='button-design fw-bold' variant='contained'>Add To Cart</Button>
+                                    <div className='d-flex justify-content-between '>
+                                        <Link className="nav-link" to={`/checkout/${product._id}`}>
+                                            <Button style={{ fontSize: "12px" }} className='button-design fw-bold' variant='contained'>Details</Button>
+                                        </Link>
+                                        <div className='nav-link'>
+                                            <Button style={{ fontSize: "12px" }} onClick={() => handleAddToCart(product)} className='button-design fw-bold' variant='contained'>Add To Cart</Button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

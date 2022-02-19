@@ -3,8 +3,19 @@
 body{
   font-family: 'Jost', sans-serif;
 }
-
+.slick-arrow {
+  display: none;
+}
+.slick-prev{
+  display: none;
+}
 .slick-next{
-  color: black !important;
-  background: black !important;
+  display: none;
+}
+/* slider arrow color */
+.slick-next:before{
+  color: #fd1d1d !important;
+}
+.slick-prev:before{
+  color: #fd1d1d !important;
 }
